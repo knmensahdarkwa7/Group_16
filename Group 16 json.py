@@ -52,7 +52,7 @@ def is_valid_email(email):
 
 def add_contact():
     """Adds a new contact with checked name, phone, and email."""
-    print("\n--- Add New Contact ---")
+    print("\n--- Add  'New Contact ---")
     name = input('Enter new contact name: ').strip().title()
 
     # Check if the contact already exists

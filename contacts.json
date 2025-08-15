@@ -1,8 +1,4 @@
 {
-    "Kwadwo": {
-        "phone": "0987654321",
-        "email": "km@gmail.com"
-    },
     "Ama": {
         "phone": "0123456789",
         "email": "ammma@gmail.com"
@@ -50,5 +46,9 @@
     "Naa Dei": {
         "phone": "0246789012",
         "email": "naa.dei@email.com"
+    },
+    "Kwadwo": {
+        "phone": "1234567890",
+        "email": "kn@gamil.com"
     }
 }
