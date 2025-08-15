@@ -1,3 +1,5 @@
+from tkinter import PhotoImage
+
 import customtkinter
 from customtkinter import *
 
@@ -155,7 +157,8 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-
 
 root = CTk()
 root.title("Contact Management System")
-root.geometry("450x650")
+root.geometry("950x650")
+root.iconbitmap('img.png')
 
 # Main title label
 title_label = CTkLabel(root, text="Contact Manager", font=("Arial", 24, "bold"))
@@ -195,7 +198,7 @@ search_button = CTkButton(button_frame, text="Search", command=search_contact_gu
 search_button.pack(side="left", padx=5, pady=5, expand=True)
 
 update_button = CTkButton(button_frame, text="Update", command=update_contact_gui)
-update_button.pack(side="left", padx=5, pady=5, expand=True)
+update_button.pack(side="left", padx=5,pady=5, expand=True)
 
 delete_button = CTkButton(button_frame, text="Delete", command=delete_contact_gui)
 delete_button.pack(side="left", padx=5, pady=5, expand=True)
