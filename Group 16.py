@@ -7,6 +7,7 @@ contacts = {
 
 }
 
+
 # ---
 # Helper function to validate phone numbers
 # ---
@@ -14,12 +15,14 @@ def is_valid_phone(number):
     """Checks if a string is a 10-digit number."""
     return number.isdigit() and len(number) == 10
 
+
 # ---
-#function to validate email addresses
+# function to validate email addresses
 # ---
 def is_valid_email(email):
     """Checks for a basic email format (contains '@' and '.')."""
     return '@' in email and '.' in email
+
 
 # ---
 # Main functions for managing contacts
@@ -53,6 +56,7 @@ def add_contact():
     contacts[name] = {'number': number, 'email': email}
     print(f"Contact '{name}' added successfully! 🎉")
 
+
 def view_contacts():
     """Displays all existing contacts."""
     print("\n--- All Contacts ---")
@@ -61,6 +65,7 @@ def view_contacts():
     else:
         for name, details in contacts.items():
             print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+
 
 def search_contact():
     """Searches for a contact by name and displays their details."""
@@ -79,6 +84,7 @@ def search_contact():
         print("Found the following contacts:")
         for name, details in found_contacts:
             print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+
 
 def update_contact():
     """Updates the phone and email of an existing contact."""
@@ -107,6 +113,7 @@ def update_contact():
         print(f"Contact '{update_name}' updated successfully! ✅")
     else:
         print(f"Contact '{update_name}' not found.")
+
 
 def delete_contact():
     """Deletes an existing contact."""
@@ -149,6 +156,7 @@ def main():
             break
         else:
             print('Invalid action. Please choose from the options above.')
+
 
 # This line ensures the main function runs when the script is executed.
 if __name__ == "__main__":
