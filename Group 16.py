@@ -104,7 +104,7 @@ def view_contacts():
         print('No contacts available. Add some to get started!')
     else:
         for name, details in contacts.items():
-            print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+            print(f'Name: {name}, Phone: {details["phone"]}, Email: {details["email"]}')
 
 
 def search_contact():
@@ -123,7 +123,7 @@ def search_contact():
     else:
         print("Found the following contacts:")
         for name, details in found_contacts:
-            print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+            print(f'Name: {name}, Phone: {details["phone"]}, Email: {details["email"]}')
 
 
 def update_contact():
@@ -138,7 +138,7 @@ def update_contact():
         while True:
             new_number = input('Enter new phone number (10 digits): ').strip()
             if is_valid_phone(new_number):
-                contacts[update_name]['number'] = new_number
+                contacts[update_name]['phone'] = new_number
                 break
             print('Invalid phone number. It must be 10 digits.')
 

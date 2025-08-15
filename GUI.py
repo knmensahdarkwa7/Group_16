@@ -9,7 +9,7 @@ from customtkinter import *
 # and the value is another dictionary with their number and email.
 # ---
 contacts = {
-"Kwame Mensah": {
+    "Kwame Mensah": {
         "phone": "233241234567",
         "email": "kwame.mensah@email.com"
     },
@@ -106,7 +106,7 @@ def view_contacts_gui():
         contact_display.delete("0.0", "end")  # Clear the text box before showing new data
         for name, details in contacts.items():
             contact_display.insert("end", f'Name: {name}\n')
-            contact_display.insert("end", f'Phone: {details["number"]}\n')
+            contact_display.insert("end", f'Phone: {details["phone"]}\n')
             contact_display.insert("end", f'Email: {details["email"]}\n')
             contact_display.insert("end", "---------------------\n")  # Separator
 
@@ -114,28 +114,35 @@ def view_contacts_gui():
 
 
 def search_contact_gui():
-    """Searches for a contact and displays the result."""
-    search_name = name_entry.get().strip().title()
+    """
+    Searches for a contact and displays the result.
+    The fix here is to convert both the search term and the contact names
+    to lowercase for a truly case-insensitive search.
+    """
+    # Get the search term and convert to lowercase for case-insensitive matching
+    search_term = name_entry.get().strip().lower()
     name_entry.delete(0, END)  # Clear the entry field
 
-    if not search_name:
+    if not search_term:
         result_label.configure(text="Please enter a name to search.", text_color='red')
         return
 
     found = False
-    contact_display.delete("0.0", "end")
+    contact_display.delete("0.0", "end")  # Clear previous results
+
+    # Iterate through contacts and check if the lowercase search term is in the lowercase name
     for name, details in contacts.items():
-        if search_name in name:
+        if search_term in name.lower():
             contact_display.insert("end", f'Name: {name}\n')
-            contact_display.insert("end", f'Phone: {details["number"]}\n')
+            contact_display.insert("end", f'Phone: {details["phone"]}\n')
             contact_display.insert("end", f'Email: {details["email"]}\n')
             contact_display.insert("end", "---------------------\n")
             found = True
 
     if found:
-        result_label.configure(text=f"Search for '{search_name}' complete.", text_color='green')
+        result_label.configure(text=f"Search for '{search_term}' complete.", text_color='green')
     else:
-        result_label.configure(text=f"No contacts found matching '{search_name}'.", text_color='orange')
+        result_label.configure(text=f"No contacts found matching '{search_term}'.", text_color='orange')
 
 
 def update_contact_gui():
@@ -167,7 +174,7 @@ def update_contact_gui():
 
     # Update fields if provided
     if number:
-        contacts[name]['number'] = number
+        contacts[name]['phone'] = number
     if email:
         contacts[name]['email'] = email
 
@@ -197,12 +204,15 @@ customtkinter.set_appearance_mode("System")  # Modes: "System", "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-blue"
 
 root = CTk()
-root.title("Contact Management System")
+root.title("Group 16 Contact Management System")
 root.geometry("950x650")
-root.iconbitmap('img.png')
+# The original code references 'img.png' which isn't provided.
+# A common practice is to handle this by skipping the icon line or
+# using a default icon to avoid errors. We'll comment out the line.
+# root.iconbitmap('img.png')
 
 # Main title label
-title_label = CTkLabel(root, text="Contact Manager", font=("Arial", 24, "bold"))
+title_label = CTkLabel(root, text="Group 16 Contact Manager", font=("Arial", 24, "bold"))
 title_label.pack(pady=10)
 
 # Frame for the input fields to keep them organized
@@ -239,7 +249,7 @@ search_button = CTkButton(button_frame, text="Search", command=search_contact_gu
 search_button.pack(side="left", padx=5, pady=5, expand=True)
 
 update_button = CTkButton(button_frame, text="Update", command=update_contact_gui)
-update_button.pack(side="left", padx=5,pady=5, expand=True)
+update_button.pack(side="left", padx=5, pady=5, expand=True)
 
 delete_button = CTkButton(button_frame, text="Delete", command=delete_contact_gui)
 delete_button.pack(side="left", padx=5, pady=5, expand=True)
