@@ -90,7 +90,9 @@ def view_contacts():
         print('No contacts available. Add some to get started!')
     else:
         for name, details in contacts.items():
-            print(f'Name: {name}, Phone: {details["phone"]}, Email: {details["email"]}')
+            print('------------------------------------------------------------------------')
+            print(f'Name: {name}, Phone: {details["phone"]}, Email: {details["email"]}\n')
+
 
 
 def search_contact():
