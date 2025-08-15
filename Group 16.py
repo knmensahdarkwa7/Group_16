@@ -1,73 +1,155 @@
-from random import randint
+# Group 16 - Contact Management System
+# This program allows users to manage contacts with options to add, update, delete, search.
 
+# A dictionary to store contacts. The key will be the contact's name,
+# and the value will be another dictionary containing their number and email.
 contacts = {
-    'Kofi': str(randint(100000000, 999999999)),
-    'Ama': str(randint(100000000, 999999999)),
-    'Kojo': str(randint(100000000, 999999999))
+
 }
 
-def search_contact():
-    search_name = input('Name to search: ').lower()
-    found = False
-    for name, info in contacts.items():
-        if search_name in name.lower():
-            print(f'Name: {name}\nDetails: {info}\n')
-            found = True
-    if not found:
-        print('No matching contact found.')
+# ---
+# Helper function to validate phone numbers
+# ---
+def is_valid_phone(number):
+    """Checks if a string is a 10-digit number."""
+    return number.isdigit() and len(number) == 10
 
-def update_contact():
-    name = input('Name to update: ')
-    if name in contacts:
-        new_number = input('New number: ')
-        contacts[name] = new_number
-        print(f'{name} updated.')
-    else:
-        print('Contact not found.')
+# ---
+#function to validate email addresses
+# ---
+def is_valid_email(email):
+    """Checks for a basic email format (contains '@' and '.')."""
+    return '@' in email and '.' in email
 
-def delete_contact():
-    name = input('Name to delete: ')
-    if name in contacts:
-        del contacts[name]
-        print(f'{name} deleted.')
-    else:
-        print('Contact not found.')
+# ---
+# Main functions for managing contacts
+# ---
 
 def add_contact():
-    name = input('New contact name: ')
+    """Adds a new contact with checked name, phone, and email."""
+    print("\n--- Add New Contact ---")
+    name = input('Enter new contact name: ').strip().title()
+
+    # Check if the contact already exists
     if name in contacts:
-        print('Contact already exists.')
-    else:
-        number = input('Phone number: ')
-        contacts[name] = number
-        print(f'{name} added.')
+        print(f"Sorry, a contact named '{name}' already exists.")
+        return
+
+    # Loop until a valid 10-digit phone number is entered
+    while True:
+        number = input('Enter phone number (10 digits): ').strip()
+        if is_valid_phone(number):
+            break
+        print('Invalid phone number. It must be 10 digits.')
+
+    # Loop until a valid email format is entered
+    while True:
+        email = input('Enter email: ').strip()
+        if is_valid_email(email):
+            break
+        print('Invalid email format. Please include an "@" and a ".".')
+
+    # Store the new contact in the dictionary
+    contacts[name] = {'number': number, 'email': email}
+    print(f"Contact '{name}' added successfully! 🎉")
 
 def view_contacts():
-    if contacts:
-        for name, number in contacts.items():
-            print(f'{name}: {number}')
+    """Displays all existing contacts."""
+    print("\n--- All Contacts ---")
+    if not contacts:
+        print('No contacts available. Add some to get started!')
     else:
-        print('No contacts available.')
+        for name, details in contacts.items():
+            print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+
+def search_contact():
+    """Searches for a contact by name and displays their details."""
+    print("\n--- Search Contacts ---")
+    search_name = input('Enter a name to search: ').strip().title()
+    found_contacts = []
+
+    # Find all contacts that contain the search name (case-insensitive)
+    for name, details in contacts.items():
+        if search_name in name:
+            found_contacts.append((name, details))
+
+    if not found_contacts:
+        print(f"No contacts found matching '{search_name}'.")
+    else:
+        print("Found the following contacts:")
+        for name, details in found_contacts:
+            print(f'Name: {name}, Phone: {details["number"]}, Email: {details["email"]}')
+
+def update_contact():
+    """Updates the phone and email of an existing contact."""
+    print("\n--- Update Contact ---")
+    update_name = input('Enter the name of the contact to update: ').strip().title()
+
+    if update_name in contacts:
+        print(f"Updating details for '{update_name}'.")
+
+        # Get and validate the new phone number
+        while True:
+            new_number = input('Enter new phone number (10 digits): ').strip()
+            if is_valid_phone(new_number):
+                contacts[update_name]['number'] = new_number
+                break
+            print('Invalid phone number. It must be 10 digits.')
+
+        # Get and validate the new email
+        while True:
+            new_email = input('Enter new email: ').strip()
+            if is_valid_email(new_email):
+                contacts[update_name]['email'] = new_email
+                break
+            print('Invalid email format. Please include an "@" and a ".".')
+
+        print(f"Contact '{update_name}' updated successfully! ✅")
+    else:
+        print(f"Contact '{update_name}' not found.")
+
+def delete_contact():
+    """Deletes an existing contact."""
+    print("\n--- Delete Contact ---")
+    name_to_delete = input('Enter the name of the contact to delete: ').strip().title()
+
+    if name_to_delete in contacts:
+        del contacts[name_to_delete]
+        print(f"Contact '{name_to_delete}' deleted successfully. 👋")
+    else:
+        print(f"Contact '{name_to_delete}' not found.")
+
 
 def main():
+    """Main loop to run the contact management system."""
+    print("Welcome to the Contact Management System! 📖")
     while True:
-        print('Choose an action: Search, Update, Delete, Add, View')
-        action = input(': ').lower()
+        print("\nWhat would you like to do?")
+        print("  [A]dd a new contact")
+        print("  [V]iew all contacts")
+        print("  [S]earch for a contact")
+        print("  [U]pdate an existing contact")
+        print("  [D]elete a contact")
+        print("  [Q]uit the program")
 
-        if action in ['search', 's']:
+        action = input('Your choice: ').strip().lower()
+
+        if action in ['add', 'a']:
+            add_contact()
+        elif action in ['view', 'v']:
+            view_contacts()
+        elif action in ['search', 's']:
             search_contact()
         elif action in ['update', 'u']:
             update_contact()
         elif action in ['delete', 'd']:
             delete_contact()
-        elif action in ['add', 'a']:
-            add_contact()
-        elif action in ['view', 'v']:
-            view_contacts()
-        elif action.lower in ['q','quit']:
+        elif action in ['quit', 'q']:
+            print("Thanks for using the Contact Management System. Goodbye! 👋")
             break
         else:
-            print('Invalid action.')
+            print('Invalid action. Please choose from the options above.')
 
-
-main()
+# This line ensures the main function runs when the script is executed.
+if __name__ == "__main__":
+    main()
