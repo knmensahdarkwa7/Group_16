@@ -4,44 +4,44 @@
 # A dictionary to store contacts. The key will be the contact's name,
 # and the value will be another dictionary containing their number and email.
 contacts = {
-"Kwame Mensah": {
+    "Kwame Mensah": {
         "phone": "233241234567",
         "email": "kwame.mensah@email.com"
     },
     "Ama Serwaa": {
-        "phone": "233549876543",
+        "phone": "0549876543",
         "email": "ama.serwaa@email.com"
     },
     "Kofi Osei": {
-        "phone": "233205678901",
+        "phone": "0205678901",
         "email": "kofi.osei@email.com"
     },
     "Akua Oforiwaa": {
-        "phone": "233261122334",
+        "phone": "0261122334",
         "email": "akua.oforiwaa@email.com"
     },
     "Yaw Boateng": {
-        "phone": "233270987654",
+        "phone": "0270987654",
         "email": "yaw.boateng@email.com"
     },
     "Adwoa Animah": {
-        "phone": "233501234567",
+        "phone": "0501234567",
         "email": "adwoa.animah@email.com"
     },
     "Kwasi Asare": {
-        "phone": "233244567890",
+        "phone": "0244567890",
         "email": "kwasi.asare@email.com"
     },
     "Yaa Opoku": {
-        "phone": "233558765432",
+        "phone": "0558765432",
         "email": "yaa.opoku@email.com"
     },
     "Nii Ayitey": {
-        "phone": "233202345678",
+        "phone": "0202345678",
         "email": "nii.ayitey@email.com"
     },
     "Naa Dei": {
-        "phone": "233246789012",
+        "phone": "0246789012",
         "email": "naa.dei@email.com"
     }
 
